@@ -38,10 +38,12 @@ if ADVANCED_LED_SETTINGS                #When enabled, shows LED_BRIGHTNESS, LED
 config LED_BRIGHTNESS
 int "LED brightness (0-100)"
 default 100
+range 0 100                             
 
 config LED_FADE_DURATION
 int "LED fade duration (ms)"
 default 500
+range 0 5000
 
 menu "Expert Settings"
     visible if ADVANCED_LED_SETTINGS
