@@ -4,6 +4,11 @@ default y                   #Set by default
 
 if LED_SUBSYSTEM
 
+config APP_HEARTBEAT_PERIOD_MS         #Kconfig added to be used with app_led
+int     "LED Heartbeat Duration(ms)"
+default 500
+range 100 2000
+
 choice
     prompt "LED blink sleep time"
     default BLINK_SLEEP_TIME_1000MS
