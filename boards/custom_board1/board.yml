@@ -1,0 +1,6 @@
+board:
+  name: custom_board1
+  full_name: Custom Board1
+  vendor: random
+  socs:
+    - name: stm32f446xx
