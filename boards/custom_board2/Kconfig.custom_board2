@@ -1,0 +1,2 @@
+config BOARD_CUSTOM_BOARD2  #Here board name: Custom Board2
+    select SOC_STM32F446XX

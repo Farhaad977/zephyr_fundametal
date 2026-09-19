@@ -1,5 +1,5 @@
 /{
     aliases{
-            app-led = &green_led_2; //app-led points to led_2 which is the green led.
+            app-led = &greenled; //app-led points to greenled which is the led_2.
     };
 };
