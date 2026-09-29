@@ -1,6 +1,7 @@
 #include <zephyr/drivers/sensor.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/drivers/gpio.h>
+#include "samp_driver.h"
 
 #define DT_DRV_COMPAT samp_driver      //So that the DEVICE_* and DT_* macros know which compatible="..." we are using 
 
@@ -13,6 +14,19 @@ struct my_config{
 struct my_data{
     uint32_t val;
 };
+
+void change_param(const struct device *dev, int32_t val)    //API to read the changed Mutable Data value
+{
+    struct my_data *dat = dev->data;
+    dat->val = val;
+    LOG_INF("Data Value:%d",dat->val);
+}
+
+void read_param(const struct device *dev)           //API to read the Mutable Data value
+{
+    struct my_data *dat = dev->data;
+    LOG_INF("Data Value:%d",dat->val);
+}
 
 static int sens_samp_fetch_myimpl(const struct device *dev,enum sensor_channel chan){           //Our own function 
     LOG_INF("Sensor Fetch from Channel %d",chan);                                      //where we typecast the dev->config and dev->data
