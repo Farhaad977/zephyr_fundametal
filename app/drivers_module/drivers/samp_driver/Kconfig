@@ -1,0 +1,4 @@
+config SAMP_DRIVER
+    bool "Sample Driver"
+    default y
+    depends on DT_HAS_SAMP_DRIVER_ENABLED

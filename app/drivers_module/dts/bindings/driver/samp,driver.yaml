@@ -1,0 +1,15 @@
+description: Samp Driver Binding
+compatible: "samp,driver"
+include: base.yaml
+
+properties:
+  gpios:
+    type: phandle-array
+    required: true
+
+#The gpio-leds.yaml specifies that the parent node has no properties but only the child node. In our node created in the 
+#app.overlay file we have a node only hence we will use cannot use gpio-led.yaml file. We will declare the 
+#properties with gpios and their type as phandle-array, required as yes. 
+
+#Two options: 1)If we wanted to use the properties, we either create a child node and use gpio-leds.yaml 
+#             2)Our own binding file has properties the way we want to set it.

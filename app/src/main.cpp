@@ -1,28 +1,26 @@
-#include <zephyr/drivers/gpio.h>
+#include <zephyr/drivers/sensor.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
+#include <zephyr/drivers/gpio.h>
 
-/* The devicetree node identifier for the "led0" alias. */
-#define LED_NODE DT_ALIAS(app_led)                          //using the app_led alias created for led0 = &green_led
+LOG_MODULE_REGISTER(main,LOG_LEVEL_INF);
 
-static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
+const struct device *dev = DEVICE_DT_GET(DT_NODELABEL(sled)); //Here the *dev will the address of the  
+                                                //struct dev that gets created when we use DEVICE_DT_INST_DEFINE(...)
+int main(void){
 
-LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
+    if(!device_is_ready(dev)) 
+    {
+        return -1;        //Need to include the <zephyr/drivers/device.h> 
+    }
 
-int main(void)
-{
-    bool led_state = true;
-
-    if (!gpio_is_ready_dt(&led)) return 0;
-
-    if (gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE) < 0) return 0;
-
-    while (1) {
-        if (gpio_pin_toggle_dt(&led) < 0) return 0;
-
-        led_state = !led_state;
-        LOG_INF("LED state: %s", led_state ? "ON" : "OFF");
-        k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS);           //using the APP_HEARTBEAT_PERIOD_MS config
+    struct sensor_value val;         
+    while(1)                           
+    {
+        sensor_sample_fetch(dev);         //Calling a Generic API where we pass in the custom
+        k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS);
+        sensor_channel_get(dev, SENSOR_CHAN_ALL,&val);        //Calling a Generic API where we pass in the custom
+        k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS); 
     }
     return 0;
 }

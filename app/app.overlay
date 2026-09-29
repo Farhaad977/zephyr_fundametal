@@ -1,5 +1,7 @@
 /{
-    aliases{
-            app-led = &greenled; //app-led points to greenled which is the led_2.
+    sled:sampled{
+        compatible="samp,driver";
+        gpios = <&gpioa 5 GPIO_ACTIVE_HIGH>;
+        status="okay";
     };
 };

@@ -63,3 +63,4 @@ endmenu
 endif
 endif
 source "Kconfig.zephyr"
+rsource "drivers_module/drivers/samp_driver/Kconfig"
