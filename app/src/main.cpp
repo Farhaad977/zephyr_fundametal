@@ -2,7 +2,7 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/drivers/gpio.h>
-#include "samp_driver.h"            //This needs to be mentioned in the app CMakeLists.txt file after the Zephyr package has been added
+//#include "samp_driver.h"            //This needs to be mentioned in the app CMakeLists.txt file after the Zephyr package has been added
 
 LOG_MODULE_REGISTER(main,LOG_LEVEL_INF);
 
@@ -14,14 +14,14 @@ int main(void){
         return -1;        //Need to include the <zephyr/drivers/device.h> 
     }
 
-    struct sensor_value val;         
+    //struct sensor_value val;         
     while(1)                           
     {
-        sensor_sample_fetch(dev);                                       //Calling a Generic API where we pass in the custom
-        read_param(dev);
-        change_param(dev, 32);
+        //sensor_sample_fetch(dev);                                       //Calling a Generic API where we pass in the custom
+        //read_param(dev);
+        //change_param(dev, 32);
         k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS);
-        sensor_channel_get(dev, SENSOR_CHAN_ALL,&val);        //Calling a Generic API where we pass in the custom
+        //sensor_channel_get(dev, SENSOR_CHAN_ALL,&val);        //Calling a Generic API where we pass in the custom
         k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS); 
     }
     return 0;
