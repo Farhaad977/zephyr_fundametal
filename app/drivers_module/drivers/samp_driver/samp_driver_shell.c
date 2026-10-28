@@ -17,6 +17,7 @@ static int cmd_get_handler(const struct shell *sh,int argc,char **argv)
     shell_print(sh, "Sample Channel Get API called");
     struct sensor_value val;
     sensor_channel_get(dev, SENSOR_CHAN_ALL, &val);
+    shell_print(sh, "Sensor Value is %d.%d",val.val1,val.val2);
     return 0;
 }
 
